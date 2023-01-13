@@ -6,6 +6,26 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"name": "getValue",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "remove",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -16,19 +36,6 @@
 				"name": "setValue",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "value",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -60,10 +67,11 @@
 	},
 	"sources": {
 		"HelloWorld.sol": {
-			"keccak256": "0x9dd165d5d335a5cf04751f808d84b609fed457218a07483c5c40c02a14189e07",
+			"keccak256": "0x4b6d427a3ea9d00fc051a2f0d4f5d25160482ae3c5456a4dcdeb075294a8c0ad",
+			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://8020e8d0eb06dae0195c7f4624fa399f1e84b6806bd6e065f082a6882c359cd0",
-				"dweb:/ipfs/QmSipT7UTqckiPBwQ2kVrQoWRLF2bdwzvQtkQyzYrvF6dB"
+				"bzz-raw://ee2a76cc80765eb2ddb45ec4e23d612806f119aef250a2e193ecd88d1d61d3c1",
+				"dweb:/ipfs/QmQ8XBTEZrEqypnvwcxmdRop7KWoizyR9Sk8pNDcdRhwqS"
 			]
 		}
 	},
