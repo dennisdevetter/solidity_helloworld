@@ -135,11 +135,11 @@
 	},
 	"sources": {
 		"Voter.sol": {
-			"keccak256": "0x50b74c840acef4ddce53f9f81b1ed05476ff120ba7864d8d6ce1ee7b80f2500e",
+			"keccak256": "0xddb025a754a21b313723afbeea9d8ffd75ba805c0b042520fa537531dac5df08",
 			"license": "UNLICENSED",
 			"urls": [
-				"bzz-raw://caf28291f335cd28022d39c8c136029943d9c356a89282ada8719473faf7fd82",
-				"dweb:/ipfs/QmZ2LhMgyJZiWN7AJbUCcwfB5ZoPBzmmL13PeaB7VWXtAR"
+				"bzz-raw://1c218b1670119cefa871d10017fb5b04a6cb710f50a5792386cd6f6ad76e7d54",
+				"dweb:/ipfs/QmNyLenCpYdpmxFVjpzj29M8MkELJhCFiR8kUxYwaDEq1t"
 			]
 		}
 	},
