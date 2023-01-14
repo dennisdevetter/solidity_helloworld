@@ -1,0 +1,13 @@
+{
+	"name": "solidity_helloworld",
+	"version": "0.0.1",
+	"license": "ISC",
+	"scripts": {
+        "deploy":"node deploy.js"
+    },
+	"author": "",
+	"dependencies": {
+		"dotenv": "^16.0.3",
+		"web3": "~1.7.3"
+	}
+}
