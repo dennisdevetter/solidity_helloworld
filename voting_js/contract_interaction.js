@@ -36,7 +36,7 @@ async function sendTransaction() {
  console.log('Voting')
 
  await voter
- .methods['vote(uint256)'](0)
+ .methods['vote(uint256)'](1)
  .send({
     from : account.address,
     gas: gasEstimate
@@ -48,7 +48,7 @@ async function sendTransaction() {
 }
 
 try {
-    sendTransaction()    
+    sendTransaction()        
 } catch (error) {
     console.log('error: ', error)   
 }
