@@ -68,13 +68,48 @@ contract('Crowdfunding', (accounts) => {
 
     it('sets state correctly when campaign succeeds', async () =>{
         await crowdfunding.sendTransaction({value: ONE_ETH, from: accounts[1]})        
-        await increaseTime(801) // 10 minutes + 1 second
+        await increaseTime(601) // 10 minutes + 1 second
         await mineBlock()
         await crowdfunding.finishCrowdfunding()
 
         const fundingState = await crowdfunding.state.call()
         expect(fundingState.toString()).to.equal(SUCCEEDED_STATE)
     })
+
+    it('alows to collect money from the campaing', async () =>{
+        await crowdfunding.sendTransaction({value: ONE_ETH, from: accounts[1]})        
+        await increaseTime(601) // 10 minutes + 1 second
+        await mineBlock()
+        await crowdfunding.finishCrowdfunding()
+        
+        const initBalance = await web3.eth.getBalance(beneficiary)
+        await crowdfunding.collect({from: accounts[1]})
+
+        const newBalance = await web3.eth.getBalance(beneficiary)
+        expect((newBalance - initBalance).toString()).to.equal(ONE_ETH)
+
+        const fundingState = await crowdfunding.state.call()
+        expect(fundingState.toString()).to.equal(PAID_OUT_STATE)
+    })
+
+    it('alows to withdraw money from the campaing', async () =>{
+        await crowdfunding.sendTransaction({value: ONE_ETH - 100, from: accounts[1]})        
+        await increaseTime(601) // 10 minutes + 1 second
+        await mineBlock()
+        await crowdfunding.finishCrowdfunding()
+        
+        const fundingState = await crowdfunding.state.call()
+        expect(fundingState.toString()).to.equal(FAILED_STATE)
+        
+        //const foo = await crowdfunding.amounts(accounts[1])
+        // console.log(foo)
+
+        //await crowdfunding.withdraw({from: accounts[1]})
+        const amount = await web3.eth.getBalance(accounts[1])
+        console.log(amount)
+        // expect(amount.toString()).to.equal('0')        
+    })
+  
 })
 
 async function increaseTime(increaseBySec) {
