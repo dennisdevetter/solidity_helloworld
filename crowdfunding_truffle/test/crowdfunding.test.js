@@ -107,7 +107,7 @@ contract('Crowdfunding', (accounts) => {
         expect(amount.toString()).to.equal('0')        
     })
 
-    it('emits an event when a campaign is finished', async () =>{        
+    it('emits an event when a campaign is finished', async () =>{         
         await increaseTime(601) 
         await mineBlock()
 
@@ -122,7 +122,23 @@ contract('Crowdfunding', (accounts) => {
         expect(eventArgs.totalCollected.toString()).to.equal('0')
         expect(eventArgs.succeeded).to.equal(false)
     })
-  
+
+    it('allows owner to cancel crowdfunding', async () =>{         
+        await crowdfunding.cancelCrowdfunding()                
+
+        const fundingState = await crowdfunding.state()
+        expect(fundingState.toString()).to.equal(FAILED_STATE)
+    })
+    
+    it('does not allow a non-owner to cancel crowdfunding', async () =>{         
+        try {
+            await crowdfunding.cancelCrowdfunding({from: accounts[3]})                    
+
+            expect.fail('should revert execution')
+        } catch (error) {
+            expect(error.message).to.include('caller is not the owner')
+        }        
+    })  
 })
 
 async function increaseTime(increaseBySec) {
