@@ -5,6 +5,12 @@ contract Crowdfunding {
 
     enum State { Ongoing, Failed, Succeeded, Paidout }
 
+    event CampaignFinished(
+        address addr,
+        uint totalCollected,
+        bool succeeded
+    );
+
     string public name;
     uint public targetAmount;
     uint public fundingDeadline;
@@ -48,6 +54,8 @@ contract Crowdfunding {
         } else {
             state = State.Succeeded;
         }
+
+        emit CampaignFinished(address(this), totalCollected(), collected);
     }
 
     function collect() public inState(State.Succeeded) {

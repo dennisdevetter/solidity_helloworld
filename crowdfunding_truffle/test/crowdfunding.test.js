@@ -47,7 +47,7 @@ contract('Crowdfunding', (accounts) => {
 
     it('does not allow to contribute after deadline', async () =>{
         try {
-            await increaseTime(601) // 10 minutes + 1 second
+            await increaseTime(601) 
             await mineBlock()
             await crowdfunding.sendTransaction({value: ONE_ETH, from: accounts[1]})        
 
@@ -58,7 +58,7 @@ contract('Crowdfunding', (accounts) => {
     })
 
     it('sets state correctly when campaign fails', async () =>{
-        await increaseTime(601) // 10 minutes + 1 second
+        await increaseTime(601) 
         await mineBlock()
         await crowdfunding.finishCrowdfunding()
 
@@ -68,7 +68,7 @@ contract('Crowdfunding', (accounts) => {
 
     it('sets state correctly when campaign succeeds', async () =>{
         await crowdfunding.sendTransaction({value: ONE_ETH, from: accounts[1]})        
-        await increaseTime(601) // 10 minutes + 1 second
+        await increaseTime(601) 
         await mineBlock()
         await crowdfunding.finishCrowdfunding()
 
@@ -78,7 +78,7 @@ contract('Crowdfunding', (accounts) => {
 
     it('alows to collect money from the campaing', async () =>{
         await crowdfunding.sendTransaction({value: ONE_ETH, from: accounts[1]})        
-        await increaseTime(601) // 10 minutes + 1 second
+        await increaseTime(601) 
         await mineBlock()
         await crowdfunding.finishCrowdfunding()
         
@@ -94,7 +94,7 @@ contract('Crowdfunding', (accounts) => {
 
     it('alows to withdraw money from the campaing', async () =>{
         await crowdfunding.sendTransaction({value: ONE_ETH - 100, from: accounts[1]})        
-        await increaseTime(601) // 10 minutes + 1 second
+        await increaseTime(601) 
         await mineBlock()
         await crowdfunding.finishCrowdfunding()
         
@@ -105,6 +105,22 @@ contract('Crowdfunding', (accounts) => {
 
         const amount = await crowdfunding.amounts(accounts[1])        
         expect(amount.toString()).to.equal('0')        
+    })
+
+    it('emits an event when a campaign is finished', async () =>{        
+        await increaseTime(601) 
+        await mineBlock()
+
+        const receipt = await crowdfunding.finishCrowdfunding()                
+        expect(receipt.logs).to.have.lengthOf(1)
+
+        const campaignFinishedEvent = receipt.logs[0]
+        expect(campaignFinishedEvent.event).to.equal('CampaignFinished')
+
+        const eventArgs = campaignFinishedEvent.args;
+        expect(eventArgs.addr).to.equal(crowdfunding.address)
+        expect(eventArgs.totalCollected.toString()).to.equal('0')
+        expect(eventArgs.succeeded).to.equal(false)
     })
   
 })
