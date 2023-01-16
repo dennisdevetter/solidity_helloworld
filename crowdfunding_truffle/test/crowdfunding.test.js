@@ -98,16 +98,13 @@ contract('Crowdfunding', (accounts) => {
         await mineBlock()
         await crowdfunding.finishCrowdfunding()
         
-        const fundingState = await crowdfunding.state.call()
+        const fundingState = await crowdfunding.state()
         expect(fundingState.toString()).to.equal(FAILED_STATE)
         
-        //const foo = await crowdfunding.amounts(accounts[1])
-        // console.log(foo)
+        await crowdfunding.withdraw({from: accounts[1]})
 
-        //await crowdfunding.withdraw({from: accounts[1]})
-        const amount = await web3.eth.getBalance(accounts[1])
-        console.log(amount)
-        // expect(amount.toString()).to.equal('0')        
+        const amount = await crowdfunding.amounts(accounts[1])        
+        expect(amount.toString()).to.equal('0')        
     })
   
 })
