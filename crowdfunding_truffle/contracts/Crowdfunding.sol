@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0.0;
 
-import "@openzeppelin/contracts/access/Ownable.sol";
+import '@openzeppelin/contracts/access/Ownable.sol';
+import './Utils.sol';
 
 contract Crowdfunding is Ownable {
+
+    using Utils for uint;
 
     enum State { Ongoing, Failed, Succeeded, Paidout }
 
@@ -34,7 +37,7 @@ contract Crowdfunding is Ownable {
     ){
         name = campaingName;
         targetAmount = targetAmountEth * 1 ether;
-        fundingDeadline = currentTime() + durationInMin * 1 minutes; // convert to seconds
+        fundingDeadline = currentTime() + durationInMin.minutesToSeconds();
         beneficiary = beneficiaryAddress;
         state = State.Ongoing;
 
