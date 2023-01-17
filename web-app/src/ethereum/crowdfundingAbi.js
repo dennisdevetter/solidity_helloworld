@@ -3,7 +3,7 @@ const crowdfundingAbi = [
     "inputs": [
       {
         "internalType": "string",
-        "name": "campaignName",
+        "name": "campaingName",
         "type": "string"
       },
       {
@@ -214,28 +214,14 @@ const crowdfundingAbi = [
   },
   {
     "inputs": [],
-    "name": "totalCollected",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function",
-    "constant": true
-  },
-  {
-    "inputs": [],
-    "name": "finishCrowdfunding",
+    "name": "cancelCrowdfunding",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
   },
   {
     "inputs": [],
-    "name": "cancelCrowdfunding",
+    "name": "finishCrowdfunding",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -262,6 +248,34 @@ const crowdfundingAbi = [
         "internalType": "bool",
         "name": "",
         "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "afterDeadline",
+    "outputs": [
+      {
+        "internalType": "bool",
+        "name": "",
+        "type": "bool"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [],
+    "name": "totalCollected",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
